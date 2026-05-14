@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+
+# Node.js / React
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Environment Variables
+.env
+.env.local
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Uploads & Results (Don't commit user images)
+backend/static/uploads/
+backend/static/results/
+backend/models/__pycache__/

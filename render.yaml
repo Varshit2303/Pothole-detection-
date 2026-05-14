@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: pothole-ai
+    env: python
+    buildCommand: |
+      pip install -r backend/requirements.txt
+      # For a full deployment, Node.js can be used to build the frontend here.
+      # However, Render's Python environment natively doesn't include npm. 
+      # Since we only have a 'python' environment defined, the ideal setup is to pre-build 
+      # the frontend locally and push the 'backend/static/dist' folder to git.
+    startCommand: gunicorn --chdir backend app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000
