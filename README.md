@@ -1,107 +1,110 @@
-# PotholeAI | Modern Detection Platform
+# 🛣️ PotholeAI | Modern Detection Platform
 
-![PotholeAI Cover](https://via.placeholder.com/1200x400/0F172A/3B82F6?text=PotholeAI+Platform)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)](#)
 
-A production-ready AI web application for real-time pothole detection. Built with a decoupled React/Vite frontend and a modular Flask API backend, powered by Ultralytics YOLO.
-
----
-
-## 🚀 Features
-
-* **Modern React Dashboard**: Dark futuristic UI with glassmorphism, built with Tailwind CSS and Framer Motion.
-* **REST API Backend**: Modular Flask backend handling inference, secure file uploads, and automatic file cleanup.
-* **Real-time Live Feed**: Direct webcam integration for live pothole detection with bounding box overlays.
-* **Detailed Analytics**: Displays pothole count, severity distribution (High/Medium/Low), and confidence scores.
-* **Production Ready**: Configured for Render deployment with `gunicorn`.
+PotholeAI is a production-grade web application designed to detect potholes in real-time from images and video streams. Leveraging state-of-the-art **YOLO11** computer vision models and a highly responsive React frontend, this platform offers rapid inference, severity classification, and a sleek user experience.
 
 ---
 
-## 🛠️ Architecture & Tech Stack
+## ✨ Key Features
 
-**Frontend**:
-* React.js (Vite)
-* Tailwind CSS
-* Framer Motion
-* Axios
-* React Router DOM
-
-**Backend**:
-* Flask (Python)
-* OpenCV (`opencv-python-headless`)
-* PyTorch
-* Ultralytics YOLOv11/v8
+- **🧠 Real-Time AI Inference**: Powered by YOLO11 to deliver blazing-fast object detection for images and webcam streams.
+- **🚦 Severity Classification**: Automatically estimates the severity of detected potholes (High, Medium, Low) based on bounding box size and confidence score.
+- **🎨 Modern Web UI**: A beautiful, responsive, and glassmorphic user interface built with React and Vite.
+- **⚡ Modular API Backend**: Built on Flask with a clean, extensible API structure separating routing, inference, and file handling.
+- **🧹 Automated Cleanup**: The backend routinely cleans up processed images to maintain optimal disk usage.
 
 ---
 
-## ⚙️ Installation & Usage
+## 🛠️ Technology Stack
 
-### 1. Setup Backend
+**Frontend:**
+- React 18 + Vite
+- Modern CSS (Flexbox, Grid, CSS Variables)
+- Lucide React (Icons)
+- React Dropzone
+
+**Backend:**
+- Python 3.12
+- Flask & Flask-CORS
+- Ultralytics YOLO (PyTorch)
+- OpenCV
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher)
+- Python (v3.10 or higher)
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/Varshit2303/Pothole-detection-.git
+cd Pothole-detection-
+```
+
+### 2. Backend Setup
+Navigate to the backend directory and install the dependencies:
 ```bash
 cd backend
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+
 pip install -r requirements.txt
 ```
-Ensure your model files (`yolo11n.pt` or `yolov8n.pt`) are placed in the `backend/models/` directory.
+> **Note**: The backend expects a YOLO weights file at `backend/models/yolo11n.pt`. If missing, download it or update `inference.py` to point to a valid YOLO `.pt` file.
 
-### 2. Setup Frontend
+Start the Flask server:
+```bash
+python app.py
+```
+*The API will be available at `http://127.0.0.1:5000`*
+
+### 3. Frontend Setup
+Open a new terminal window, navigate to the frontend directory, and install dependencies:
 ```bash
 cd frontend
 npm install
 ```
 
-### 3. Running Locally (Development)
-Open two terminal windows:
-
-**Terminal 1 (Backend API):**
+Start the Vite development server:
 ```bash
-cd backend
-python app.py
-```
-*Runs on `http://127.0.0.1:5000`*
-
-**Terminal 2 (Frontend Dev Server):**
-```bash
-cd frontend
 npm run dev
 ```
-*Runs on `http://localhost:5173`*
+*The app will be available at `http://localhost:5173`*
 
-### 4. Running Production Build
-To serve the React app directly from the Flask backend (as configured for Render):
+---
 
-1. Build the frontend:
-```bash
-cd frontend
-npm run build
+## 📁 Project Structure
+
+```text
+pothole_detection-main/
+├── backend/                  # Flask REST API
+│   ├── models/               # YOLO model weights (.pt files)
+│   ├── routes/               # API endpoint definitions
+│   ├── services/             # Core inference and business logic
+│   ├── static/               # Uploaded and processed images
+│   ├── utils/                # Helper functions (file handling, cleanup)
+│   └── app.py                # Flask entry point
+├── frontend/                 # React UI
+│   ├── public/               # Static assets
+│   ├── src/                  # React components, contexts, and API services
+│   ├── index.css             # Global styles and design system
+│   └── vite.config.js        # Vite configuration
+└── README.md
 ```
-*(This builds into `backend/static/dist`)*
-
-2. Start the production backend:
-```bash
-cd backend
-gunicorn app:app
-```
-*(Access the app at `http://127.0.0.1:8000`)*
 
 ---
 
-## 🔌 API Endpoints
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Varshit2303/Pothole-detection-/issues).
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/health` | Check API status & trigger cleanup |
-| `POST` | `/api/predict/image` | Upload an image for detection |
-| `GET` | `/api/webcam` | MJPEG video stream with live inference |
-| `GET` | `/api/download/<file>` | Retrieve processed media |
-
----
-
-## 🗑️ Cleanup Policy
-To prevent disk bloat, the backend includes an automated cleanup utility (`backend/utils/file_handler.py`). Uploaded and processed files are automatically deleted after 1 hour whenever an API request is made.
-
----
-
-## 👨‍💻 Developed By
-Ch N V Ajay Kumar
-[nvakumarch@gmail.com](mailto:nvakumarch@gmail.com)
-
-*Transformed and modernized by Antigravity AI.*
+## 📝 License
+This project is [MIT](LICENSE) licensed.
