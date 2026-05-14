@@ -106,5 +106,4 @@ pothole_detection-main/
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Varshit2303/Pothole-detection-/issues).
 
-## 📝 License
-This project is [MIT](LICENSE) licensed.
+
